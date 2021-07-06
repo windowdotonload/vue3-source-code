@@ -16,8 +16,8 @@ const targets = fs.readdirSync('packages').filter(f => {
 })
 
 async function build(target) {  // rollup -c --environment TARGET:shared
-    await execa("rollup", ['-c', '-environment', `NODE_ENV:${target}`,
-        { stdio: "inherit" }]  //子进程打包的东西共享给父进程
+    await execa("rollup", ['-c', '--environment', `TARGET:${target}`],
+        { stdio: "inherit" }  //子进程打包的东西共享给父进程
     )
 }
 
