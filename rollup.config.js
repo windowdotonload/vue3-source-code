@@ -19,7 +19,7 @@ const packagesDir = path.resolve(__dirname, 'packages') //找到packages
 // packageDir --- 打包的基准目录
 const packageDir = path.resolve(packagesDir, process.env.TARGET)    //找到具体某个模块 如：D:\MYCODE_Project\vue3-source\packages\reaactiviety 
 const name = path.basename(packageDir)
-console.log('this is name in rollup.js-------', name)
+console.log('this is name in rollup.js------- v', name)
 // 针对的是packageDir这个模块
 const resolve = (p) => path.resolve(packageDir, p)
 // 拿到package.json这个文件

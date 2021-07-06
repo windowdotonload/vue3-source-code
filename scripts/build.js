@@ -15,6 +15,9 @@ const targets = fs.readdirSync('packages').filter(f => {
     return true
 })
 
+
+// 最终还是要靠rollup打包，build.js承担了自动化的任务，例如参数的配置，文件名字的输入
+// 还是需要依赖于rollup.js
 async function build(target) {  // rollup -c --environment TARGET:shared
     await execa("rollup", ['-c', '--environment', `TARGET:${target}`],
         { stdio: "inherit" }  //子进程打包的东西共享给父进程
