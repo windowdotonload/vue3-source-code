@@ -1,0 +1,22 @@
+{
+  "name": "@vue/shared",
+  "version": "1.0.0",
+  "main": "index.js",
+  "module": "dist/shared.esm-bundler.js",
+  "license": "MIT",
+  "buildOptions": {
+    "name": "vueShared",
+    "formats": [
+      "cjs",
+      "esm-bundler"
+    ]
+  },
+  "dependencies": {
+    "@rollup/plugin-json": "^4.1.0",
+    "@rollup/plugin-node-resolve": "^13.0.0",
+    "execa": "^5.1.1",
+    "rollup": "^2.52.7",
+    "rollup-plugin-typescript2": "^0.30.0",
+    "typescript": "^4.3.5"
+  }
+}
