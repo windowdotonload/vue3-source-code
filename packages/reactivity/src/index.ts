@@ -3,10 +3,8 @@
  * @version:
  * @Author: windowdotonload
  */
+// 导出方法不实现功能
 
-import { shared } from '@vue/shared'
-const reactive = {
 
-}
 
-export { reactive }
+export { reactive, shallowReactive, readonly, shallowReadonly } from './reactive'

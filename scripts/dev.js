@@ -16,3 +16,5 @@ async function build(target) {  // rollup -c --environment TARGET:shared
         { stdio: "inherit" }  //子进程打包的东西共享给父进程
     )
 }
+
+build('reactivity')
