@@ -4,12 +4,15 @@
  * @Author: windowdotonload
  */
 import { isObject } from '@vue/shared'
+import { track } from './effect'
+import { TrackOpTypes } from './operator'
 import { readonly, reactive } from './reactive'
 function createGetter(isReadOnly = false, shallow = false) {
     return function get(target, key) {
         const res = Reflect.get(target, key)
         if (!isReadOnly) {
             // 如果不是仅读的那么就需要去收集页面上的依赖，后续触发更新
+            track(target, TrackOpTypes.GET, key)
         }
         if (shallow) {
             return res
@@ -21,6 +24,7 @@ function createGetter(isReadOnly = false, shallow = false) {
         return res
     }
 }
+
 function createSetter(Shallow = false) {
     return function set(target, key, value) {
 
