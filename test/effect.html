@@ -20,14 +20,14 @@
         const app = document.getElementById('app')
         let { reactive, effect } = vueReactivity
 
-        let state = reactive({ name: 'this is name', age: { ageSub: "this is age" } })
+        let state = reactive({ name: 'this is name', age: { ageSub: "this is age" }, arr: [1, 2, 3] })
         effect(() => {
-            app.innerHTML = state.name
+            app.innerHTML = state.arr[2]
         })
         setTimeout(() => {
             console.log('ok')
             state.name = 'change-name'
-            state.nam1 = 'this is name1'
+            state.arr.length = 1
         }, 1000)
     </script>
 </body>

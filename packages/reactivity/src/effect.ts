@@ -70,14 +70,15 @@ export function track(target, type, key) { //可以拿到当前的effect  ---> a
 export function trigger(target, type, key?, newValue?, oldValue?) {
     // 如果这个属性没有收集过effect，则不需要做任何操作
     const depsMap = targetMap.get(target)
+
+    if (!depsMap) return
+    // 将所有的effect存到一个新的集合中，最终一起执行
+    const effects = new Set()
     const add = (effectsToAdd) => {
         if (effectsToAdd) {
             effectsToAdd.forEach(effect => effects.add(effect));
         }
     }
-    if (!depsMap) return
-    // 将所有的effect存到一个新的集合中，最终一起执行
-    const effects = new Set()
     // 1、看修改的是否是数组的长度
     if (isArray(target) && key === 'length') {
         depsMap.forEach((dep, key) => {
@@ -87,5 +88,8 @@ export function trigger(target, type, key?, newValue?, oldValue?) {
                 add(dep)
             }
         });
+    } else {
+
     }
+    effects.forEach((effect: any) => effect())
 }
