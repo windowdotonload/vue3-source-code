@@ -1,4 +1,9 @@
 /*
+ * @Descripttion: 
+ * @version: 
+ * @Author: windowdotonload
+ */
+/*
  * @Descripttion:
  * @version:
  * @Author: windowdotonload
@@ -58,4 +63,8 @@ export function track(target, type, key) { //可以拿到当前的effect  ---> a
     }
     //↓↓↓      target                    map
     // {name:1,age：{a:1}}  ----->   [name,set(effect)]
+}
+
+export function trigger(target, type, key?, newValue?, oldValue?) {
+
 }

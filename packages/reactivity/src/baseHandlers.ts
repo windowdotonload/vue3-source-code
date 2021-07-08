@@ -1,12 +1,17 @@
 /*
+ * @Descripttion: 
+ * @version: 
+ * @Author: windowdotonload
+ */
+/*
  * @Descripttion:
  * @version:
  * @Author: windowdotonload
  */
-import { hasOwn, isArray, isIntegerKey, isObject } from '@vue/shared'
+import { hasOwn, isArray, isIntegerKey, isObject, hasChange } from '@vue/shared'
 import { isAccessor } from 'typescript'
-import { track } from './effect'
-import { TrackOpTypes } from './operator'
+import { track, trigger } from './effect'
+import { TrackOpTypes, TriggerOrTypes } from './operator'
 import { readonly, reactive } from './reactive'
 function createGetter(isReadOnly = false, shallow = false) {
     return function get(target, key) {
@@ -34,6 +39,14 @@ function createSetter(Shallow = false) {
         let haskey = isArray(oldValue) && isIntegerKey(key) ? Number(key) < target.length : hasOwn(target, key)
 
         const result = Reflect.set(target, key, value)
+
+        if (haskey) {
+            // 新增
+            trigger(target, TriggerOrTypes.ADD, key, value)
+        } else if (hasChange(oldValue, value)) {
+            // 修改
+            trigger(target, TriggerOrTypes.SET, key, value, oldValue)
+        }
 
 
 
