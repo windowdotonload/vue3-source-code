@@ -36,8 +36,10 @@ function createSetter(Shallow = false) {
 
         const oldValue = target[key]
         // 要区分是新增还是修改,数组和对象要区分开
+        // vue2中无法对新增的属性进行拦截，因为使用defineProperty属性必须要明确指导key是什么，而新增的属性无法预知属性名是什么
+        // defintProperty(obj,key,handler)
         let haskey = isArray(oldValue) && isIntegerKey(key) ? Number(key) < target.length : hasOwn(target, key)
-        console.log('this is key---', haskey)
+
         const result = Reflect.set(target, key, value)
 
         if (haskey) {

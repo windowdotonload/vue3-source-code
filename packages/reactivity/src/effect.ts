@@ -9,6 +9,8 @@
  * @Author: windowdotonload
  */
 
+import { isArray } from "@vue/shared"
+
 // effect 相当于vue2中的watcher
 export function effect(fn, options: any = {}) {
     const effect = createReactiveEffect(fn, options)
@@ -66,5 +68,24 @@ export function track(target, type, key) { //可以拿到当前的effect  ---> a
 }
 
 export function trigger(target, type, key?, newValue?, oldValue?) {
-
+    // 如果这个属性没有收集过effect，则不需要做任何操作
+    const depsMap = targetMap.get(target)
+    const add = (effectsToAdd) => {
+        if (effectsToAdd) {
+            effectsToAdd.forEach(effect => effects.add(effect));
+        }
+    }
+    if (!depsMap) return
+    // 将所有的effect存到一个新的集合中，最终一起执行
+    const effects = new Set()
+    // 1、看修改的是否是数组的长度
+    if (isArray(target) && key === 'length') {
+        depsMap.forEach((dep, key) => {
+            // 针对于key是length，数组的设置的index大于length的newValue
+            // 例如改变state.arr.length = 1,而原本有一个属性state.arr[2],2大于新设置的1，所以需要更新
+            if (key === 'length' || key > newValue) {
+                add(dep)
+            }
+        });
+    }
 }
