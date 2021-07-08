@@ -9,7 +9,8 @@
  * @Author: windowdotonload
  */
 
-import { isArray } from "@vue/shared"
+import { isArray, isIntegerKey } from "@vue/shared"
+import { TriggerOrTypes } from './operator'
 
 // effect 相当于vue2中的watcher
 export function effect(fn, options: any = {}) {
@@ -52,9 +53,10 @@ export function track(target, type, key) { //可以拿到当前的effect  ---> a
     if (activeEffect === undefined) {
         return
     }
+    debugger
     let depsMap = targetMap.get(target)
     if (!depsMap) {
-        targetMap.set(targetMap, (depsMap = new Map))
+        targetMap.set(target, (depsMap = new Map))
     }
     let dep = depsMap.get(key)
     if (!dep) {
@@ -70,7 +72,6 @@ export function track(target, type, key) { //可以拿到当前的effect  ---> a
 export function trigger(target, type, key?, newValue?, oldValue?) {
     // 如果这个属性没有收集过effect，则不需要做任何操作
     const depsMap = targetMap.get(target)
-
     if (!depsMap) return
     // 将所有的effect存到一个新的集合中，最终一起执行
     const effects = new Set()
@@ -89,7 +90,17 @@ export function trigger(target, type, key?, newValue?, oldValue?) {
             }
         });
     } else {
-
+        // 可能是对象
+        if (key !== undefined) {
+            add(depsMap.get(key))
+        }
+        // 可能是修改数组某一项
+        switch (type) {
+            case TriggerOrTypes.ADD:
+                if (isArray(target) && isIntegerKey(key)) {
+                    add(depsMap.get('length'))
+                }
+        }
     }
     effects.forEach((effect: any) => effect())
 }

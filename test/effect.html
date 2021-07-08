@@ -22,12 +22,12 @@
 
         let state = reactive({ name: 'this is name', age: { ageSub: "this is age" }, arr: [1, 2, 3] })
         effect(() => {
-            app.innerHTML = state.arr[2]
+            app.innerHTML = state.arr[2] + '' + state.age1
         })
         setTimeout(() => {
-            console.log('ok')
             state.name = 'change-name'
             state.arr.length = 1
+            state.age1 = 'age1'
         }, 1000)
     </script>
 </body>
