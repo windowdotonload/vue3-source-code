@@ -37,7 +37,7 @@ function createSetter(Shallow = false) {
         const oldValue = target[key]
         // 要区分是新增还是修改,数组和对象要区分开
         let haskey = isArray(oldValue) && isIntegerKey(key) ? Number(key) < target.length : hasOwn(target, key)
-
+        console.log('this is key---', haskey)
         const result = Reflect.set(target, key, value)
 
         if (haskey) {
@@ -61,7 +61,7 @@ const readonlyGet = createGetter(true)
 const shallowReadonlyGet = createGetter(true, true)
 
 const set = createSetter()
-const shallowSet = createSetter()
+const shallowSet = createSetter(true)
 
 export const mutableHandlers = {
     get,
