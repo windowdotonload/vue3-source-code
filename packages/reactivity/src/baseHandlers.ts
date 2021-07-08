@@ -3,7 +3,8 @@
  * @version:
  * @Author: windowdotonload
  */
-import { isObject } from '@vue/shared'
+import { hasOwn, isArray, isIntegerKey, isObject } from '@vue/shared'
+import { isAccessor } from 'typescript'
 import { track } from './effect'
 import { TrackOpTypes } from './operator'
 import { readonly, reactive } from './reactive'
@@ -28,6 +29,16 @@ function createGetter(isReadOnly = false, shallow = false) {
 function createSetter(Shallow = false) {
     return function set(target, key, value) {
 
+        const oldValue = target[key]
+        // 要区分是新增还是修改,数组和对象要区分开
+        let haskey = isArray(oldValue) && isIntegerKey(key) ? Number(key) < target.length : hasOwn(target, key)
+
+        const result = Reflect.set(target, key, value)
+
+
+
+        // 数据更新时通知effect修改
+        return result
     }
 }
 

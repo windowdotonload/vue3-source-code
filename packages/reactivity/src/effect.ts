@@ -21,11 +21,11 @@ let activeEffect         //存储当前的effect
 const effectStack = []
 function createReactiveEffect(fn, options) {
     const effect = function reactiveEffect() {
-        if (effectStack.includes(effect)) { //保证effect没有加入到effectstack中
+        if (!effectStack.includes(effect)) { //保证effect没有加入到effectstack中
             try {
                 activeEffect = effect
                 effectStack.push(effect)
-                return fn()   //函数执行时会取值，触发get
+                return fn()   //函数执行时会取值，触发get --> 调用track
             } finally {
                 effectStack.pop()
                 activeEffect = effectStack[effectStack.length - 1]
@@ -41,7 +41,7 @@ function createReactiveEffect(fn, options) {
 
 const targetMap = new WeakMap()
 // 让某个对象的属性收集当前对应的effect函数
-export function track(target, type, key) { //可以拿到当前的effect
+export function track(target, type, key) { //可以拿到当前的effect  ---> activeEffect
     if (activeEffect === undefined) {
         return
     }
@@ -56,4 +56,6 @@ export function track(target, type, key) { //可以拿到当前的effect
     if (!dep.has(activeEffect)) {
         dep.add(activeEffect)
     }
+    //↓↓↓      target                    map
+    // {name:1,age：{a:1}}  ----->   [name,set(effect)]
 }
