@@ -1,3 +1,7 @@
+import { hasChange } from "@vue/shared"
+import { track, trigger } from "./effect"
+import { TrackOpTypes, TriggerOrTypes } from './operator'
+
 /*
  * @Descripttion:
  * @version:
@@ -17,7 +21,21 @@ class RefImpl {
     public _value
     public __v_isRef = true
     constructor(public rawValue, public shallow) {
+        this._value = rawValue
+    }
 
+    get value() {
+        track(this, TrackOpTypes.GET, 'value')
+
+        return this._value
+    }
+
+    set value(newValue) {
+        if (hasChange(newValue, this.rawValue)) {
+            this.rawValue = newValue
+            this._value = newValue
+            trigger(this, TriggerOrTypes.SET, 'value', newValue)
+        }
     }
 }
 
