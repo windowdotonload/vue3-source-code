@@ -53,7 +53,6 @@ export function track(target, type, key) { //可以拿到当前的effect  ---> a
     if (activeEffect === undefined) {
         return
     }
-    debugger
     let depsMap = targetMap.get(target)
     if (!depsMap) {
         targetMap.set(target, (depsMap = new Map))
