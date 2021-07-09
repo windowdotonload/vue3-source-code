@@ -21,7 +21,7 @@ import { readonly, reactive } from './reactive'
 function createGetter(isReadOnly = false, shallow = false) {
     // reactivity返回proxy，访问属性触发get，本质上reactivity其实就是做了一件事：track
     // 换言之，调用reactivity包裹对象的目的就是为了部署track
-    // 而track就是为了收集依赖
+    // 而track最终目的就是一个：就是为了收集依赖
     return function get(target, key) {
         const res = Reflect.get(target, key)
         if (!isReadOnly) {
