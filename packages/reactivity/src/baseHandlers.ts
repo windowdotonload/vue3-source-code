@@ -21,6 +21,7 @@ import { readonly, reactive } from './reactive'
 function createGetter(isReadOnly = false, shallow = false) {
     // reactivity返回proxy，访问属性触发get，本质上reactivity其实就是做了一件事：track
     // 换言之，调用reactivity包裹对象的目的就是为了部署track
+    // 而track就是为了收集依赖
     return function get(target, key) {
         const res = Reflect.get(target, key)
         if (!isReadOnly) {
@@ -32,6 +33,7 @@ function createGetter(isReadOnly = false, shallow = false) {
         }
         if (isObject(res)) {
             // vue2一开始就递归，vue3懒代理，取值时再进行代理
+            // 如果不递归，那么修改state.age.age就不会触发响应式，只到state.age是响应式的
             return isReadOnly ? readonly(res) : reactive(res)
         }
         return res
