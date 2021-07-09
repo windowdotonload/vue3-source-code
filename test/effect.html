@@ -3,6 +3,11 @@
  * @version: 
  * @Author: windowdotonload
 -->
+<!--
+ * @Descripttion: 
+ * @version: 
+ * @Author: windowdotonload
+-->
 <!DOCTYPE html>
 <html lang="en">
 
@@ -23,7 +28,7 @@
         let state = reactive({ name: 'this is name', age: { ageSub: "this is age" }, arr: [1, 2, 3] })
         effect(() => {
             // app.innerHTML = state.arr[2] + '' + state.age1
-            app.innerHTML = state.tick++
+            app.innerHTML = state.age.ageSub
         })
         setTimeout(() => {
             state.name = 'change-name'

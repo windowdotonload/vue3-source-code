@@ -4,6 +4,11 @@
  * @Author: windowdotonload
  */
 /*
+ * @Descripttion: 
+ * @version: 
+ * @Author: windowdotonload
+ */
+/*
  * @Descripttion:
  * @version:
  * @Author: windowdotonload
@@ -19,6 +24,7 @@ import {
 
 
 export function reactive(target) {
+    // ractive最终就是返回一个proxy
     //拦截对象，判断是否是仅读的
     return createReactieObject(target, false, mutableHandlers)
 }
