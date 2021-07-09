@@ -1,4 +1,9 @@
 /*
+ * @Descripttion: 
+ * @version: 
+ * @Author: windowdotonload
+ */
+/*
  * @Descripttion:
  * @version:
  * @Author: windowdotonload
@@ -29,7 +34,7 @@ export function readonly(target) {
 export function shallowReadonly(target) {
     return createReactieObject(target, true, shallowReadonlyHandlers)
 }
-// 是不是进度，是不是深度，柯里化
+// 是不是仅读，是不是深度，柯里化
 
 const reactiveMap = new WeakMap()
 const readonlyMap = new WeakMap()
