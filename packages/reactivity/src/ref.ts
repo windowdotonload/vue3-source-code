@@ -1,4 +1,4 @@
-import { hasChange, isObject } from "@vue/shared"
+import { hasChange, isArray, isObject } from "@vue/shared"
 import { track, trigger } from "./effect"
 import { TrackOpTypes, TriggerOrTypes } from './operator'
 import { reactive } from "./reactive"
@@ -61,4 +61,12 @@ function createRef(rawValue, shallow = false) {
 
 export function toRef(target, key) {
     return new ObjectRefImpl(target, key)
+}
+
+export function toRefs(object) {
+
+    const res = isArray(object) ? new Array(object.length) : {}
+    for (let key in object) {
+        res[key] = toRef(object, key)
+    }
 }
