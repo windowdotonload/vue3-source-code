@@ -29,7 +29,9 @@ let activeEffect         //存储当前的effect
 const effectStack = []
 function createReactiveEffect(fn, options) {
     const effect = function reactiveEffect() {
-        if (!effectStack.includes(effect)) { //保证effect没有加入到effectstack中
+        //保证effect没有加入到effectstack中
+        //例如：防止effect(() => {state.age++})重复执行陷入循环
+        if (!effectStack.includes(effect)) {
             try {
                 activeEffect = effect
                 effectStack.push(effect)

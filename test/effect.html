@@ -22,7 +22,8 @@
 
         let state = reactive({ name: 'this is name', age: { ageSub: "this is age" }, arr: [1, 2, 3] })
         effect(() => {
-            app.innerHTML = state.arr[2] + '' + state.age1
+            // app.innerHTML = state.arr[2] + '' + state.age1
+            app.innerHTML = state.tick++
         })
         setTimeout(() => {
             state.name = 'change-name'
