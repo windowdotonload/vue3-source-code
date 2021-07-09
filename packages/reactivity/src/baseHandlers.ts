@@ -34,7 +34,7 @@ function createGetter(isReadOnly = false, shallow = false) {
         if (isObject(res)) {
             // vue2一开始就递归，vue3懒代理，取值时再进行代理
             // 如果不递归，那么修改state.age.age就不会触发响应式，只到state.age是响应式的
-            // 这里的递归最终会返回一个res，页面上最终要有值
+            // 这里的递归最终会返回一个res，页面上最终要有值，递归也是为了在track是通过target存储依赖的map，子属性是对象get的键是子属性这个对象
             return isReadOnly ? readonly(res) : reactive(res)
         }
         return res
