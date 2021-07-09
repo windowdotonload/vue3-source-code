@@ -38,9 +38,7 @@ function createSetter(Shallow = false) {
         // vue2中无法对新增的属性进行拦截，因为使用defineProperty属性必须要明确指导key是什么，而新增的属性无法预知属性名是什么
         // defintProperty(obj,key,handler)
         let haskey = isArray(oldValue) && isIntegerKey(key) ? Number(key) < target.length : hasOwn(target, key)
-
         const result = Reflect.set(target, key, value)
-
         if (haskey) {
             // 新增
             trigger(target, TriggerOrTypes.ADD, key, value)
@@ -48,9 +46,6 @@ function createSetter(Shallow = false) {
             // 修改
             trigger(target, TriggerOrTypes.SET, key, value, oldValue)
         }
-
-
-
         // 数据更新时通知effect修改
         return result
     }
