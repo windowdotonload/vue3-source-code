@@ -29,11 +29,13 @@
         effect(() => {
             // app.innerHTML = state.arr[2] + '' + state.age1
             app.innerHTML = state.age.ageSub
+            console.log(state.age)
         })
         setTimeout(() => {
-            state.name = 'change-name'
-            state.arr.length = 1
-            state.age1 = 'age1'
+            // state.name = 'change-name'
+            // state.arr.length = 1
+            // state.age1 = 'age1'
+            state.age.ageSub = 'change-age-agesub'
         }, 1000)
     </script>
 </body>

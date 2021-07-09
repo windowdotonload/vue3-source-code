@@ -35,6 +35,9 @@ function createGetter(isReadOnly = false, shallow = false) {
             // vue2一开始就递归，vue3懒代理，取值时再进行代理
             // 如果不递归，那么修改state.age.age就不会触发响应式，只到state.age是响应式的
             // 这里的递归最终会返回一个res，页面上最终要有值，递归也是为了在track是通过target存储依赖的map，子属性是对象get的键是子属性这个对象
+            // 这里return了一个proxy
+            // 例如:state.age是一个对象,那么通过get后返回的是一个state.age就是proxy,而原本对象obj.age还是一个普通对象
+            // 这就是proxy的强大之处,返回的proxy对象的每个属性在访问时都可以通过get来控制返回的是什么
             return isReadOnly ? readonly(res) : reactive(res)
         }
         return res
