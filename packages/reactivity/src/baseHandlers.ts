@@ -9,6 +9,11 @@
  * @Author: windowdotonload
  */
 /*
+ * @Descripttion: 
+ * @version: 
+ * @Author: windowdotonload
+ */
+/*
  * @Descripttion:
  * @version:
  * @Author: windowdotonload
@@ -26,6 +31,7 @@ function createGetter(isReadOnly = false, shallow = false) {
         const res = Reflect.get(target, key)
         if (!isReadOnly) {
             // 如果不是仅读的那么就需要去收集页面上的依赖，后续触发更新
+            // 递归式，sate和state.age都是对象，都存在targetMap中，对应不同的map值
             track(target, TrackOpTypes.GET, key)
         }
         if (shallow) {
