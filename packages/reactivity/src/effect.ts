@@ -30,6 +30,7 @@ const effectStack = []
 function createReactiveEffect(fn, options) {
     const effect = function reactiveEffect() {
         //保证effect没有加入到effectstack中
+        // effect的目的一是为了执行回调函数，二是为了activeEffective指向自身，以便在track时在dep中添加这个effect
         //例如：防止effect(() => {state.age++})重复执行陷入循环
         if (!effectStack.includes(effect)) {
             try {
