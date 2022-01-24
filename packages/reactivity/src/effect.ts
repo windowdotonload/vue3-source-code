@@ -1,13 +1,4 @@
-/*
- * @Descripttion: 
- * @version: 
- * @Author: windowdotonload
- */
-/*
- * @Descripttion:
- * @version:
- * @Author: windowdotonload
- */
+
 
 import { isArray, isIntegerKey } from "@vue/shared"
 import { TriggerOrTypes } from './operator'

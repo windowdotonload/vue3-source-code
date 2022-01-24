@@ -1,18 +1,10 @@
-/*
- * @Descripttion: 
- * @version: 
- * @Author: windowdotonload
- */
+
 import { hasChange, isArray, isObject } from "@vue/shared"
 import { track, trigger } from "./effect"
 import { TrackOpTypes, TriggerOrTypes } from './operator'
 import { reactive } from "./reactive"
 
-/*
- * @Descripttion:
- * @version:
- * @Author: windowdotonload
- */
+
 export function ref(value) {
     // value 是一个普通类型
     // 将一个普通类型变成对象

@@ -1,18 +1,4 @@
-/*
- * @Descripttion: 
- * @version: 
- * @Author: windowdotonload
- */
-/*
- * @Descripttion: 
- * @version: 
- * @Author: windowdotonload
- */
-/*
- * @Descripttion:
- * @version:
- * @Author: windowdotonload
- */
+
 import { isObject } from '@vue/shared'
 import {
     mutableHandlers,

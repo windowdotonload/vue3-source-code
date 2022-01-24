@@ -1,13 +1,4 @@
-/*
- * @Descripttion: 
- * @version: 
- * @Author: windowdotonload
- */
-/*
- * @Descripttion: 
- * @version: 
- * @Author: windowdotonload
- */
+
 export const isObject = (value) => typeof value == 'object' && value !== null
 export const extend = Object.assign
 export const isArray = Array.isArray

@@ -1,23 +1,4 @@
-/*
- * @Descripttion: 
- * @version: 
- * @Author: windowdotonload
- */
-/*
- * @Descripttion: 
- * @version: 
- * @Author: windowdotonload
- */
-/*
- * @Descripttion: 
- * @version: 
- * @Author: windowdotonload
- */
-/*
- * @Descripttion:
- * @version:
- * @Author: windowdotonload
- */
+
 import { hasOwn, isArray, isIntegerKey, isObject, hasChange } from '@vue/shared'
 import { isAccessor } from 'typescript'
 import { track, trigger } from './effect'
